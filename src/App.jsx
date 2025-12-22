@@ -69,11 +69,12 @@ function App() {
     }
 
     try {
-      // Request PiP window with specified dimensions
-      // Smaller height to demonstrate scrolling
+      // Request PiP window with specified dimensions and options
       const pipWin = await window.documentPictureInPicture.requestWindow({
-        width: 400,
-        height: 500,
+        width: 420,
+        height: 600,
+        disallowReturnToOpener: true,
+        preferInitialWindowPlacement: true,
       })
 
       // Copy styles to PiP window
