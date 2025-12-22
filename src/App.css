@@ -250,30 +250,101 @@ h2 {
 
 /* PiP Window Styles */
 .pip-container {
-  padding: 20px;
-  text-align: center;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  /* Custom scrollbar for webkit browsers */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+.pip-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pip-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.pip-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+}
+
+.pip-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.pip-scrollable-content {
+  padding: 20px;
+  text-align: center;
 }
 
 .pip-container h2 {
   color: white;
   margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.pip-container h3 {
+  color: white;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
 }
 
 .pip-container p {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   opacity: 0.9;
+  line-height: 1.6;
 }
 
 .pip-container .color-buttons {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   max-width: 320px;
+}
+
+.pip-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.pip-list {
+  text-align: left;
+  padding-left: 25px;
+  margin: 15px 0;
+  line-height: 1.8;
+}
+
+.pip-list li {
+  margin-bottom: 10px;
+  opacity: 0.95;
+}
+
+.pip-info-box {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.pip-info-box p {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.pip-info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.pip-footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .close-button {
