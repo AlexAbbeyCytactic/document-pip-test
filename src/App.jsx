@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './App.css'
 import PopupOverlay from './components/popups/PopupOverlay'
 import BrowserPopup from './components/popups/BrowserPopup'
+import CompanyPopup from './components/popups/CompanyPopup'
+import MessagingPopup from './components/popups/MessagingPopup'
 import ChatPopup from './components/popups/ChatPopup'
 import CloudPopup from './components/popups/CloudPopup'
 import ExplorerPopup from './components/popups/ExplorerPopup'
@@ -132,6 +134,8 @@ function App() {
     switch (activePopup) {
       case 'browser': return <BrowserPopup onClose={handleClose} />
       case 'news': return <NewsPopup onClose={handleClose} />
+      case 'company': return <CompanyPopup onClose={handleClose} />
+      case 'messaging': return <MessagingPopup onClose={handleClose} />
       case 'chat': return <ChatPopup onClose={handleClose} />
       case 'cloud': return <CloudPopup onClose={handleClose} />
       case 'explorer': return <ExplorerPopup onClose={handleClose} />
@@ -153,11 +157,13 @@ function App() {
         <div className="controls" style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center', marginBottom: '30px' }}>
           <button className="button primary" onClick={() => setActivePopup('browser')}>Browser</button>
           <button className="button primary" onClick={() => setActivePopup('news')}>News Article</button>
-          <button className="button primary" onClick={() => setActivePopup('chat')}>Chat</button>
-          <button className="button primary" onClick={() => setActivePopup('cloud')}>Cloud</button>
-          <button className="button primary" onClick={() => setActivePopup('explorer')}>Explorer</button>
-          <button className="button primary" onClick={() => setActivePopup('mobile')}>Mobile</button>
-          <button className="button primary" onClick={() => setActivePopup('siem')}>SIEM</button>
+          <button className="button primary" onClick={() => setActivePopup('company')}>Company Profile</button>
+          <button className="button primary" onClick={() => setActivePopup('messaging')}>Messaging App</button>
+          <button className="button primary" onClick={() => setActivePopup('chat')} disabled>Chat</button>
+          <button className="button primary" onClick={() => setActivePopup('cloud')} disabled>Cloud</button>
+          <button className="button primary" onClick={() => setActivePopup('explorer')} disabled>Explorer</button>
+          <button className="button primary" onClick={() => setActivePopup('mobile')} disabled>Mobile</button>
+          <button className="button primary" onClick={() => setActivePopup('siem')} disabled>SIEM</button>
           <button className="button primary" onClick={() => setActivePopup('terminal')}>Terminal</button>
         </div>
 
