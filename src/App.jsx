@@ -11,6 +11,7 @@ import ExplorerPopup from './components/popups/ExplorerPopup'
 import MobilePopup from './components/popups/MobilePopup'
 import SiemPopup from './components/popups/SiemPopup'
 import TerminalPopup from './components/popups/TerminalPopup'
+import IRReportPopup from './components/popups/IRReportPopup'
 import NewsPopup from './components/popups/NewsPopup'
 import PipContent from './components/PipContent'
 
@@ -142,6 +143,7 @@ function App() {
       case 'mobile': return <MobilePopup onClose={handleClose} />
       case 'siem': return <SiemPopup onClose={handleClose} />
       case 'terminal': return <TerminalPopup onClose={handleClose} />
+      case 'ir-report': return <IRReportPopup onClose={handleClose} />
       default: return null
     }
   }
@@ -165,6 +167,7 @@ function App() {
           <button className="button primary" onClick={() => setActivePopup('mobile')} disabled>Mobile</button>
           <button className="button primary" onClick={() => setActivePopup('siem')} disabled>SIEM</button>
           <button className="button primary" onClick={() => setActivePopup('terminal')}>Terminal</button>
+          <button className="button primary" onClick={() => setActivePopup('ir-report')}>IR Report</button>
         </div>
 
         <hr style={{ margin: '30px 0', border: '0', borderTop: '1px solid #eee' }} />
