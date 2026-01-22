@@ -1,6 +1,7 @@
 import React from 'react';
+import ColorPicker from './ColorPicker';
 
-function PipContent() {
+function PipContent({ colors, currentColor, onColorChange }) {
   return (
     <div className="pip-wrapper">
       <style>{`
@@ -321,6 +322,21 @@ function PipContent() {
 
         <div className="notes-trigger">
           Notes <i className="ph ph-caret-down"></i>
+        </div>
+
+        <hr style={{ margin: '20px 0', border: '0', borderTop: '1px solid var(--border-color)' }} />
+
+        <div style={{ marginTop: '20px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '900', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' }}>
+            BACKGROUND COLOR
+          </div>
+          {colors && currentColor && onColorChange && (
+            <ColorPicker
+              colors={colors}
+              currentColor={currentColor}
+              onColorChange={onColorChange}
+            />
+          )}
         </div>
       </div>
     </div>

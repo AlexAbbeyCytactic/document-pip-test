@@ -14,9 +14,23 @@ import TerminalPopup from './components/popups/TerminalPopup'
 import IRReportPopup from './components/popups/IRReportPopup'
 import NewsPopup from './components/popups/NewsPopup'
 import PipContent from './components/PipContent'
+import ColorPicker from './components/ColorPicker'
+
+// Define colors array to be used by both main and PiP windows
+const COLORS = [
+  { name: 'White', value: '#ffffff' },
+  { name: 'Blue', value: '#e3f2fd' },
+  { name: 'Orange', value: '#fff3e0' },
+  { name: 'Purple', value: '#f3e5f5' },
+  { name: 'Green', value: '#e8f5e9' },
+  { name: 'Pink', value: '#fce4ec' },
+  { name: 'Yellow', value: '#fffde7' },
+  { name: 'Cyan', value: '#e0f7fa' },
+]
 
 function App() {
   const [activePopup, setActivePopup] = useState(null)
+  const [backgroundColor, setBackgroundColor] = useState('#ffffff')
 
   // PiP State
   const [isPipOpen, setIsPipOpen] = useState(false)
@@ -25,6 +39,11 @@ function App() {
 
   // Check if Document PiP API is supported
   const isPipSupported = 'documentPictureInPicture' in window
+
+  // Handle color change from PiP window
+  const handleColorChange = (newColor) => {
+    setBackgroundColor(newColor)
+  }
 
   // Copy all styles from main document to PiP window
   const copyStylesToPip = (pipWin) => {
@@ -83,7 +102,13 @@ function App() {
 
       // Create React root and render PiP content
       const root = createRoot(pipDiv)
-      root.render(<PipContent />)
+      root.render(
+        <PipContent
+          colors={COLORS}
+          currentColor={backgroundColor}
+          onColorChange={handleColorChange}
+        />
+      )
 
       // Store references
       pipWindow.current = pipWin
@@ -129,6 +154,19 @@ function App() {
     }
   }, [])
 
+  // Update PiP window when background color changes
+  useEffect(() => {
+    if (pipRoot.current && isPipOpen) {
+      pipRoot.current.render(
+        <PipContent
+          colors={COLORS}
+          currentColor={backgroundColor}
+          onColorChange={handleColorChange}
+        />
+      )
+    }
+  }, [backgroundColor, isPipOpen])
+
 
   const renderPopupContent = () => {
     const handleClose = () => setActivePopup(null)
@@ -149,7 +187,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className="app" style={{ backgroundColor, transition: 'background-color 0.3s ease' }}>
       <div className="container">
         <h1>Content Box Templates Demo</h1>
         <p className="description">
@@ -210,6 +248,28 @@ function App() {
               </span>
             </div>
           </div>
+        </div>
+
+        <hr style={{ margin: '30px 0', border: '0', borderTop: '1px solid #eee' }} />
+
+        <div className="color-selector">
+          <h2>Background Color Switcher</h2>
+          <p className="description">
+            Select a color here and watch it update in both the main window and the PiP window!
+          </p>
+          <div className="status-item" style={{ marginBottom: '15px' }}>
+            <strong>Current Color:</strong>
+            <span className="color-value">{backgroundColor}</span>
+            <span
+              className="color-preview"
+              style={{ backgroundColor }}
+            ></span>
+          </div>
+          <ColorPicker
+            colors={COLORS}
+            currentColor={backgroundColor}
+            onColorChange={handleColorChange}
+          />
         </div>
       </div>
 
